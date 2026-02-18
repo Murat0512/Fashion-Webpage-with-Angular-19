@@ -24,16 +24,7 @@
     <button class="logout" *ngIf="authService.currentUser$ | async" (click)="logout()">Logout</button>
     <a *ngIf="!(authService.currentUser$ | async)" class="login main-btn" routerLink="/login">Login</a>
   </div>
-  <div class="user-profile-modal" *ngIf="showUserSection">
-    <div
-      class="user-profile-modal-backdrop"
-      (click)="showUserSection = false"
-    ></div>
-    <div class="user-profile-modal-content">
-      <app-user-profile></app-user-profile>
-      <button class="close-modal" (click)="showUserSection = false">×</button>
-    </div>
-  </div>
+
 </header>
 
 <div class="app-layout">
@@ -41,12 +32,12 @@
     <nav class="sidebar-nav">
       <ul>
         <li><a routerLink="/cart" routerLinkActive="active">Cart</a></li>
-        <li><a routerLink="/user-profile" routerLinkActive="active">Account Settings</a></li>
         <li><a routerLink="/categories" routerLinkActive="active">Categories</a></li>
         <li><a routerLink="/help" routerLinkActive="active">Help Center</a></li>
         <li><a routerLink="/saved-items" routerLinkActive="active">Saved Items</a></li>
         <li><a routerLink="/favorites" routerLinkActive="active">Favorites</a></li>
         <li><a routerLink="/wishlist" routerLinkActive="active">Wish List</a></li>
+
       </ul>
     </nav>
   </aside>

@@ -5,11 +5,11 @@ import { AuthService } from './auth.service';
 import { CartService } from './cart.service';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Observable } from 'rxjs';
-import { UserProfileComponent } from './component/user-profile/user-profile.component';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, AsyncPipe, NgIf, UserProfileComponent],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, AsyncPipe, NgIf],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

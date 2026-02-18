@@ -1,3 +1,4 @@
+
 <section class="cart">
   <h2>Your Cart</h2>
 
@@ -18,12 +19,34 @@
         </div>
         <button (click)="removeItem(item.id)">Remove</button>
       </article>
+      
+      <ul>
+        <li *ngFor ="let item of items">
+
+
+          <div class="cart-list-item-row">
+            <img [src]="item.image" [alt]="item.name" class="cart-list-thumb">
+            <div class="cart-list-item-info">
+              <span class="cart-list-item-title">{{ item.name }}</span> - ${{ item.price }} x {{ item.quantity }} = ${{ item.price * item.quantity }}
+            </div>
+          </div>
+
+          <div>
+            <p *ngIf="item.price < 20" [ngClass]="'cart-price-message sale'">{{item.name}} is on sale</p>
+            <p *ngIf="item.price >= 20 && item.price < 30" [ngClass]="'cart-price-message moderate'">{{item.name}} is moderately priced</p>
+            <p *ngIf="item.price >= 30" [ngClass]="'cart-price-message expensive'">{{item.name}} is expensive</p>
+          </div>
+
+        </li>
+
+      </ul>
 
       <div class="cart-total">
         <strong>Cart Total:</strong>
         <span>${{ total$ | async }}</span>
       </div>
 
+      <button class="checkout-btn" (click)="goToCheckout()">Go to Checkout</button>
       <button class="clear" (click)="clear()">Clear Cart</button>
     </div>
   </div>

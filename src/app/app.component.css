@@ -54,24 +54,104 @@
   z-index: 3;
 }
 
+/* Layout for sidebar */
 :host {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  --bg: #f7f4ef;
-  --ink: #1f1b16;
-  --accent: #d94f04;
-  --muted: #6b625a;
-  --line: #e3dbd2;
 }
+
+.app-layout {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.sidebar {
+  width: 220px;
+  background: #f7f4ef;
+  border-right: 1px solid #e3dbd2;
+  padding: 32px 0 0 0;
+  min-height: calc(100vh - 60px);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 10;
+}
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0 0 0 24px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.sidebar-nav a {
+  color: #d94f04;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.08rem;
+  transition: color 0.2s;
+}
+.sidebar-nav a.active,
+.sidebar-nav a:hover {
+  color: #b53e03;
+  text-decoration: underline;
+}
+.app-main {
+  flex: 1 1 auto;
+  padding: 32px 24px 0 24px;
+  min-width: 0;
+}
+
 
 .app-header {
   display: flex;
   align-items: center;
-  gap: 24px;
   padding: 16px 24px;
   border-bottom: 1px solid var(--line);
   background: linear-gradient(120deg, #f7f4ef 0%, #fff2e4 100%);
+  position: relative;
+}
+
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  font-size: 2.1rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  margin-right: 32px;
+  user-select: none;
+}
+.logo-main {
+  color: #d94f04;
+  font-family: 'Georgia', serif;
+  font-size: 2.2rem;
+  letter-spacing: 1px;
+}
+.logo-accent {
+  color: #ffb86b;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  font-size: 2.2rem;
+  margin-left: 2px;
+  letter-spacing: 0.5px;
+}
+
+.nav {
+  display: flex;
+  gap: 16px;
+  flex: 1 1 auto;
+}
+
+.auth {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+  position: relative;
+  z-index: 2;
 }
 
 .brand {
@@ -80,25 +160,43 @@
   letter-spacing: 0.5px;
 }
 
+
 .nav {
   display: flex;
-  gap: 16px;
-  flex: 1;
+  gap: 22px;
+  flex: 1 1 auto;
+  margin-left: 18px;
 }
 
 .nav a {
-  color: var(--ink);
+  color: #d94f04;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 1.08rem;
+  letter-spacing: 0.5px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #fff2e4 60%, #ffe5d0 100%);
+  box-shadow: 0 2px 8px rgba(217,79,4,0.04);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
   display: inline-flex;
   align-items: center;
   gap: 6px;
 }
 
+.nav a:hover {
+  background: linear-gradient(90deg, #ffd6b0 60%, #ffb86b 100%);
+  color: #b53e03;
+  box-shadow: 0 4px 16px rgba(217,79,4,0.10);
+  text-decoration: none;
+}
+
 .nav a.active {
-  color: var(--accent);
-  border-bottom: 2px solid var(--accent);
-  padding-bottom: 2px;
+  color: #fff;
+  background: linear-gradient(90deg, #d94f04 60%, #ffb86b 100%);
+  box-shadow: 0 4px 16px rgba(217,79,4,0.13);
+  border-bottom: none;
+  padding-bottom: 8px;
 }
 
 .badge {
@@ -122,13 +220,22 @@
 }
 
 .logout {
-  background: var(--accent);
+  background: linear-gradient(90deg, #d94f04 60%, #ffb86b 100%);
+  color: #fff;
   border: none;
-  color: white;
-  padding: 8px 12px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
   cursor: pointer;
-  border-radius: 6px;
-  font-weight: 600;
+  margin-right: 8px;
+  box-shadow: 0 2px 8px rgba(217,79,4,0.07);
+  transition: background 0.2s, box-shadow 0.2s;
+  opacity: 1 !important;
+}
+.logout:hover {
+  background: linear-gradient(90deg, #b53e03 60%, #ffb86b 100%);
+  box-shadow: 0 4px 16px rgba(217,79,4,0.13);
 }
 
 .app-main {
@@ -167,10 +274,31 @@
 
 .footer-content {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 6px;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.footer-left {
+  flex: 1;
+  text-align: left;
+}
+.footer-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .footer-content a {

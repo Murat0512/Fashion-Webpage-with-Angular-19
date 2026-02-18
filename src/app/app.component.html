@@ -1,6 +1,8 @@
-<header class="app-header">
-  <div class="brand">Shoppers</div>
 
+<header class="app-header">
+  <div class="brand-logo">
+    <span class="logo-main">Shop</span><span class="logo-accent">pers</span>
+  </div>
   <nav class="nav">
     <a routerLink="/home" routerLinkActive="active">Home</a>
     <a routerLink="/products" routerLinkActive="active">Products</a>
@@ -10,7 +12,6 @@
     </a>
     <a routerLink="/about" routerLinkActive="active">About</a>
   </nav>
-
   <div class="auth">
     <button
       class="user-section-btn main-btn"
@@ -19,10 +20,10 @@
     >
       User Profile
     </button>
+    <a class="contact main-btn" routerLink="/contact">Contact</a>
     <button class="logout" *ngIf="authService.currentUser$ | async" (click)="logout()">Logout</button>
     <a *ngIf="!(authService.currentUser$ | async)" class="login main-btn" routerLink="/login">Login</a>
   </div>
-
   <div class="user-profile-modal" *ngIf="showUserSection">
     <div
       class="user-profile-modal-backdrop"
@@ -35,11 +36,45 @@
   </div>
 </header>
 
-<main class="app-main">
-  <router-outlet></router-outlet>
-</main>
+<div class="app-layout">
+  <aside class="sidebar" *ngIf="authService.currentUser$ | async">
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a routerLink="/cart" routerLinkActive="active">Cart</a></li>
+        <li><a routerLink="/user-profile" routerLinkActive="active">Account Settings</a></li>
+        <li><a routerLink="/categories" routerLinkActive="active">Categories</a></li>
+        <li><a routerLink="/help" routerLinkActive="active">Help Center</a></li>
+        <li><a routerLink="/saved-items" routerLinkActive="active">Saved Items</a></li>
+        <li><a routerLink="/favorites" routerLinkActive="active">Favorites</a></li>
+        <li><a routerLink="/wishlist" routerLinkActive="active">Wish List</a></li>
+      </ul>
+    </nav>
+  </aside>
+  <main class="app-main">
+    <router-outlet></router-outlet>
+  </main>
+</div>
 <footer class="app-footer">
   <div class="footer-content">
-    <span>© {{ currentYear }} Shoppers. All rights reserved.</span>
+    <div class="footer-left">
+      <span>© {{ currentYear }} Shoppers. All rights reserved.</span>
+    </div>
+    <div class="footer-right">
+      <div class="footer-social">
+        <span>Follow us:</span>
+        <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" width="24" height="24" style="vertical-align:middle;">
+        </a>
+        <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter" width="24" height="24" style="vertical-align:middle;">
+        </a>
+        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" width="24" height="24" style="vertical-align:middle;">
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" width="24" height="24" style="vertical-align:middle;">
+        </a>
+      </div>
+    </div>
   </div>
 </footer>

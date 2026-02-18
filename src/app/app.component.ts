@@ -1,12 +1,31 @@
+
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from './auth.service';
+import { CartService } from './cart.service';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { Observable } from 'rxjs';
+import { UserProfileComponent } from './component/user-profile/user-profile.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, AsyncPipe, NgIf, UserProfileComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'shoppers';
+  itemCount$: Observable<number>;
+  currentYear = new Date().getFullYear();
+  showUserSection = false;
+
+  constructor(
+    public authService: AuthService,
+    private cartService: CartService
+  ) {
+    this.itemCount$ = this.cartService.itemCount$;
+  }
+
+  logout(): void {
+    this.authService.logout();
+  }
 }

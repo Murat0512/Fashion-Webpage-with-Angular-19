@@ -1,0 +1,30 @@
+<section class="cart">
+  <h2>Your Cart</h2>
+
+  <div *ngIf="(items$ | async) as items">
+    <p *ngIf="items.length === 0">Your cart is empty.</p>
+
+    <div class="cart-list" *ngIf="items.length > 0">
+      <article class="cart-item" *ngFor="let item of items">
+        <img [src]="item.image" [alt]="item.name">
+        <div class="info">
+          <h3>{{ item.name }}</h3>
+          <p class="desc">{{ item.description }}</p>
+          <div class="meta">
+            <span class="price">${{ item.price }}</span>
+            <span class="qty">Qty: {{ item.quantity }}</span>
+            <span class="line-total">Total: ${{ item.price * item.quantity }}</span>
+          </div>
+        </div>
+        <button (click)="removeItem(item.id)">Remove</button>
+      </article>
+
+      <div class="cart-total">
+        <strong>Cart Total:</strong>
+        <span>${{ total$ | async }}</span>
+      </div>
+
+      <button class="clear" (click)="clear()">Clear Cart</button>
+    </div>
+  </div>
+</section>
